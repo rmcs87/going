@@ -7,7 +7,7 @@ import (
 
 func TestEmptyStack(t *testing.T) {
 	t.Run("Empty on Creation", func(t *testing.T) {
-		stack := newStack()
+		stack := newStack[int]()
 		want := true
 		got := stack.IsEmpty()
 		if got != want {
@@ -15,7 +15,7 @@ func TestEmptyStack(t *testing.T) {
 		}
 	})
 	t.Run("Not Empty on Addition", func(t *testing.T) {
-		stack := newStack()
+		stack := newStack[int]()
 		stack.Push(1)
 		want := false
 		got := stack.IsEmpty()
@@ -24,7 +24,7 @@ func TestEmptyStack(t *testing.T) {
 		}
 	})
 	t.Run("Empty on Removing Unique Element", func(t *testing.T) {
-		stack := newStack()
+		stack := newStack[int]()
 		stack.Push(1)
 		stack.Pop()
 		want := true
@@ -37,7 +37,7 @@ func TestEmptyStack(t *testing.T) {
 
 func TestPop(t *testing.T) {
 	t.Run("Return Correct Value on Pop", func(t *testing.T) {
-		stack := newStack()
+		stack := newStack[int]()
 		stack.Push(1)
 		want := 1
 		got, err := stack.Pop()
@@ -49,7 +49,7 @@ func TestPop(t *testing.T) {
 		}
 	})
 	t.Run("Return Correct Value on Pop", func(t *testing.T) {
-		stack := newStack()
+		stack := newStack[int]()
 		stack.Push(1)
 		stack.Push(2)
 		stack.Push(4)
@@ -63,7 +63,7 @@ func TestPop(t *testing.T) {
 		}
 	})
 	t.Run("Error on Pop with empty Stack", func(t *testing.T) {
-		stack := newStack()
+		stack := newStack[int]()
 		_, err := stack.Pop()
 		if !errors.Is(err, ErrorEmptyStack) {
 			t.Errorf("expected %v, but %v", ErrorEmptyStack, err)
